@@ -5,7 +5,6 @@ import json
 import requests
 from datetime import datetime
 from plyer import notification
-import winsound
 
 
 def show_notification(title: str, message: str, frequencies=None, duration = 500):
@@ -14,8 +13,19 @@ def show_notification(title: str, message: str, frequencies=None, duration = 500
 
     notification.notify(title=title, message=message, timeout=120)
 
-    for freq in frequencies:
-        winsound.Beep(freq, duration)
+    try:
+        import winsound
+        for freq in frequencies:
+            winsound.Beep(freq, duration)
+    except Exception as e:
+        print(e)
+        import os
+        sound = ''
+        for freq in frequencies:
+            sound = sound + f" -f {freq} -l {duration}"
+
+        os.system(f'beep {sound}')
+
 
 
 alert_date_string_format = "%Y-%m-%d %H:%M:%S"
