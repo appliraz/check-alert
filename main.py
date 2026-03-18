@@ -20,11 +20,11 @@ def show_notification(title: str, message: str, frequencies=None, duration = 500
     except Exception as e:
         print(e)
         import os
-        sound = ''
+        sound = 'play -n'
         for freq in frequencies:
-            sound = sound + f" -f {freq} -l {duration}"
+            sound += f" : synth {duration/1000} square {freq}"
 
-        os.system(f'beep {sound}')
+        os.system(sound)
 
 
 
@@ -115,6 +115,7 @@ def fetch_last_alert_history(city) -> AlertResult | None:
         exit(1)
 
 if __name__ == '__main__':
+    show_notification('Reached max calls', 'Reached max calls', [524, 524, 494], 250)
     max_calls = 200
     call_no = 0
     last_alert: AlertResult | None = None
