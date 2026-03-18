@@ -22,10 +22,8 @@ def show_notification(title: str, message: str, frequencies=None, duration = 500
         import os
         sound = 'play -n'
         for freq in frequencies:
-            sound += f" : synth {duration/1000} square {freq}"
-
-        os.system(sound)
-
+            os.system(sound + f" synth {0.8*(duration/1000)} sine {freq} vol 0.3")
+            sleep(0.2*(duration/1000))
 
 
 alert_date_string_format = "%Y-%m-%d %H:%M:%S"
