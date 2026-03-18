@@ -4,14 +4,13 @@ import json
 
 import requests
 from datetime import datetime
-from plyer import notification
-
 
 def show_notification(title: str, message: str, frequencies=None, duration = 500):
     if frequencies is None:
         frequencies = [440, 440, 440, 494, 524]
 
     try:
+        from plyer import notification
         notification.notify(title=title, message=message, timeout=120)
 
         import winsound
