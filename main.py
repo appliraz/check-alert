@@ -11,12 +11,13 @@ def show_notification(title: str, message: str, frequencies=None, duration = 500
     if frequencies is None:
         frequencies = [440, 440, 440, 494, 524]
 
-    notification.notify(title=title, message=message, timeout=120)
-
     try:
+        notification.notify(title=title, message=message, timeout=120)
+
         import winsound
         for freq in frequencies:
             winsound.Beep(freq, duration)
+
     except Exception as e:
         print(e)
         import os
