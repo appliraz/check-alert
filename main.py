@@ -113,13 +113,21 @@ def fetch_last_alert_history(city) -> AlertResult | None:
         exit(1)
 
 if __name__ == '__main__':
-    show_notification('Reached max calls', 'Reached max calls', [524, 524, 494], 250)
+    import sys
+
+    print(sys.argv)
     max_calls = 200
     call_no = 0
     last_alert: AlertResult | None = None
 
+    city = 'ראשון לציון - מזרח'
+
+    if len(sys.argv) > 1:
+        city = sys.argv[1].split('=')[1]
+        print(city)
+
     while call_no < max_calls:
-        alert_result = fetch_last_alert('ראשון לציון - מזרח')
+        alert_result = fetch_last_alert(city)
 
         print(alert_result)
 
